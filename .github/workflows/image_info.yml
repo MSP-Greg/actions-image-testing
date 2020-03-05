@@ -40,6 +40,14 @@ jobs:
       - name: where & version info
         run:  ./where.ps1
 
+      - name: Ruby info
+        run:  |
+          # Ruby Info
+          ruby -W0 -e 'puts %Q(TOPDIR   #{RbConfig::TOPDIR})'
+          ruby -W0 -e 'puts %Q(bindir   #{RbConfig::CONFIG[%q(bindir)]})'
+          echo ''
+          ruby -W0 -e 'puts %Q(Gem.path), Gem.path'
+
   Ubuntu-macOS:
     name: >-
       ${{ matrix.os }}
@@ -53,6 +61,9 @@ jobs:
       - name: repo checkout
         uses: actions/checkout@v2
 
+      - name: disk info
+        run:  df -h 
+
       - name:  show ENV
         shell: pwsh
         run:   gci env:* | sort-object name
@@ -61,7 +72,8 @@ jobs:
         shell: pwsh
         run:   echo $env:PATH.replace([IO.Path]::PathSeparator, "`n")
         
-      - name: Ruby info
+      - name:  Ruby info
+        shell: pwsh
         run:  |
           # Ruby Info
           ruby -W0 -e 'puts %Q(TOPDIR   #{RbConfig::TOPDIR})'
@@ -69,5 +81,8 @@ jobs:
           echo 
           ruby -W0 -e 'puts %Q(Gem.path), Gem.path'
           echo
+          echo which ruby:
+          which -a ruby
+          echo
           echo which rake:
-          which rake
+          which -a rake
