@@ -1,0 +1,73 @@
+name: Image Info
+
+# 2020-02-29
+
+on: [push, pull_request]
+
+jobs:
+  Windows:
+    runs-on: windows-2019
+    strategy:
+      fail-fast: false
+    steps:
+      - name: repo checkout
+        uses: actions/checkout@v2
+
+      - name: show ENV
+        run:  gci env:* | sort-object name
+
+      - name: show PATH
+        run:  Write-Host $env:PATH.replace(";", "`n")
+
+      - name: disk info
+        run: Get-CimInstance Win32_LogicalDisk
+
+      - name: dir C:/
+        run:  dir C:/
+
+      - name: dir C:/hostedtoolcache/windows
+        run:  dir C:/hostedtoolcache/windows
+
+      - name: dir C:/hostedtoolcache/windows/Ruby
+        run:  dir C:/hostedtoolcache/windows/Ruby
+
+      - name: dir C:/Program Files
+        run:  dir 'C:/Program Files'
+
+      - name: dir C:/tools
+        run:  dir C:/tools
+
+      - name: where & version info
+        run:  ./where.ps1
+
+  Ubuntu-macOS:
+    name: >-
+      ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ ubuntu-18.04, macos ]
+
+    steps:
+      - name: repo checkout
+        uses: actions/checkout@v2
+
+      - name:  show ENV
+        shell: pwsh
+        run:   gci env:* | sort-object name
+
+      - name:  show PATH
+        shell: pwsh
+        run:   echo $env:PATH.replace([IO.Path]::PathSeparator, "`n")
+        
+      - name: Ruby info
+        run:  |
+          # Ruby Info
+          ruby -W0 -e 'puts %Q(TOPDIR   #{RbConfig::TOPDIR})'
+          ruby -W0 -e 'puts %Q(bindir   #{RbConfig::CONFIG[%q(bindir)]})'
+          echo 
+          ruby -W0 -e 'puts %Q(Gem.path), Gem.path'
+          echo
+          echo which rake:
+          which rake
