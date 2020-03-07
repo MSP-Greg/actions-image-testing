@@ -78,11 +78,11 @@ jobs:
           # Ruby Info
           ruby -W0 -e 'puts %Q(TOPDIR   #{RbConfig::TOPDIR})'
           ruby -W0 -e 'puts %Q(bindir   #{RbConfig::CONFIG[%q(bindir)]})'
-          echo 
+          echo ''
           ruby -W0 -e 'puts %Q(Gem.path), Gem.path'
-          echo
+          echo ''
           echo which ruby:
           which -a ruby
-          echo
+          echo ''
           echo which rake:
           which -a rake
