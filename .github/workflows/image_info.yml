@@ -81,8 +81,8 @@ jobs:
           echo ''
           ruby -W0 -e 'puts %Q(Gem.path), Gem.path'
           echo ''
-          echo which ruby:
+          echo 'which ruby:'
           which -a ruby
           echo ''
-          echo which rake:
+          echo 'which rake:'
           which -a rake
