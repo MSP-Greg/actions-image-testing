@@ -1,6 +1,6 @@
 name: Image Info
 
-# 2020-04-18
+# 2020-04-29
 
 on: [push, pull_request]
 
@@ -25,7 +25,7 @@ jobs:
         run:  Write-Host $env:PATH.replace(";", "`n")
 
       - name: disk info
-        run: Get-CimInstance Win32_LogicalDisk
+        run:  Get-CimInstance Win32_LogicalDisk
 
       - name: dir C:/
         run:  dir C:/
