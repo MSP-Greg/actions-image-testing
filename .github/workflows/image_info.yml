@@ -9,6 +9,9 @@ jobs:
     name: >-
       ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        working-directory: working_directory
     strategy:
       fail-fast: false
       matrix:
