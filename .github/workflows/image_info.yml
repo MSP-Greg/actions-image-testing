@@ -55,6 +55,11 @@ jobs:
           ruby -W0 -e 'puts %Q(bindir   #{RbConfig::CONFIG[%q(bindir)]})'
           echo ''
           ruby -W0 -e 'puts %Q(Gem.path), Gem.path'
+      - name: Bash test
+        shell: bash
+        run: |
+          echo $PATH
+          7z --help
 
   Ubuntu-macOS:
     name: >-
