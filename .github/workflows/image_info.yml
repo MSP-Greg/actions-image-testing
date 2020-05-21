@@ -1,6 +1,6 @@
 name: Image Info
 
-# 2020-05-20
+# 2020-05-21
 
 on: [push, pull_request]
 
@@ -55,11 +55,8 @@ jobs:
           ruby -W0 -e 'puts %Q(bindir   #{RbConfig::CONFIG[%q(bindir)]})'
           echo ''
           ruby -W0 -e 'puts %Q(Gem.path), Gem.path'
-      - name: Bash test
-        shell: bash
-        run: |
-          echo $PATH
-          7z --help
+      - name: MSYS2 packages
+        run:  ruby pacman_query.rb
 
   Ubuntu-macOS:
     name: >-
