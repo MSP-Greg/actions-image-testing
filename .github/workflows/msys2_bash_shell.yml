@@ -21,5 +21,7 @@ jobs:
       - name:  MSYS2 bash test
         shell: bash.exe --noprofile --norc -e -o pipefail {0}
         run:   |
-          7z --help
-          pacman --help
+          openssl version
+          tar --version
+          pacman --version
+          gcc --version
