@@ -1,0 +1,25 @@
+name: Embedded MSYS2
+
+on: [push, pull_request]
+
+jobs:
+  Windows:
+    name: >-
+      ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ windows-latest ]
+        ruby: [ mingw ]
+    steps:
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby }}
+
+      - name: MSYS2 Packages
+        run:  pacman.exe -Q | grep -v ^mingw-w64- 
+
+      - name: Mingw64 Packages
+        run:  pacman.exe -Q | grep ^mingw-w64-x86_64- | sed 's/^mingw-w64-x86_64-//'
