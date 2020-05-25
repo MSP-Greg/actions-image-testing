@@ -15,7 +15,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ windows-latest ]
+        os: [ windows-latest, windows-2016 ]
 
     steps:
       - name: repo checkout
