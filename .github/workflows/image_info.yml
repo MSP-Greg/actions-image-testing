@@ -45,6 +45,9 @@ jobs:
       - name: dir C:/tools
         run:  dir C:/tools
 
+      - name: dir C:/msys64/home
+        run:  dir C:/msys64/home
+
       - name: where & version info
         run:  ./where.ps1
 
