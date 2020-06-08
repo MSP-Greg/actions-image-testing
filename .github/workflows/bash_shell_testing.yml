@@ -1,0 +1,44 @@
+name: MSYS2 bash shell
+
+on: [push, pull_request]
+
+jobs:
+  Windows:
+    name: >-
+      ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ windows-latest ]
+        ruby: [ mingw ]
+    steps:
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby }}
+
+      - name: where bash
+        run:  where.exe bash.exe
+
+      - name: Show Path
+        run:  echo $env:Path.split(';')
+
+      - name:  "shell: bash.exe"
+        shell: bash.exe --noprofile --norc -e -o pipefail {0}
+        run:   |
+          openssl version -d
+          pwd
+
+      - name:  "shell: C:/msys64/usr/bin/bash.exe"
+        shell: C:/msys64/usr/bin/bash.exe --noprofile --norc -e -o pipefail {0}
+        run:   |
+          openssl version -d
+          pwd
+
+      - name:  "shell: bash"
+        shell: bash
+        run:   |
+          openssl version -d
+          pwd
+
