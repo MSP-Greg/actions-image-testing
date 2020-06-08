@@ -1,4 +1,4 @@
-name: MSYS2 bash shell
+name: shell testing
 
 on: [push, pull_request]
 
@@ -24,6 +24,12 @@ jobs:
       - name: Show Path
         run:  echo $env:Path.split(';')
 
+      - name:  "shell: bash"
+        shell: bash
+        run:   |
+          openssl version -d
+          pwd
+
       - name:  "shell: bash.exe"
         shell: bash.exe --noprofile --norc -e -o pipefail {0}
         run:   |
@@ -35,10 +41,3 @@ jobs:
         run:   |
           openssl version -d
           pwd
-
-      - name:  "shell: bash"
-        shell: bash
-        run:   |
-          openssl version -d
-          pwd
-
