@@ -14,7 +14,7 @@ jobs:
         ruby: [ mingw ]
     steps:
       - name: Set up Ruby
-        uses: ruby/setup-ruby@v1
+        uses: MSP-Greg/ruby-setup-ruby@add-path
         with:
           ruby-version: ${{ matrix.ruby }}
 
@@ -29,11 +29,6 @@ jobs:
         run:   |
           openssl version -d
           pwd
-
-      - name:  "add-path"
-        shell: cmd
-        run:   |
-          echo ::add-path::C:\msys64\usr\bin
 
       - name:  "shell: bash.exe"
         shell: bash.exe --noprofile --norc -e -o pipefail {0}
