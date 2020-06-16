@@ -36,8 +36,3 @@ jobs:
           openssl version -d
           pwd
 
-      - name:  "shell: C:/msys64/usr/bin/bash.exe"
-        shell: C:/msys64/usr/bin/bash.exe --noprofile --norc -e -o pipefail {0}
-        run:   |
-          openssl version -d
-          pwd
