@@ -1,0 +1,44 @@
+name: shell testing
+
+on: [push, pull_request]
+
+jobs:
+  set-env:
+    name: >-
+      set-env ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ windows-latest ]
+
+    steps:
+      - name:  use set-env
+        run:   echo "::set-env name=Path::C:\msys64\mingw64\bin;C:\msys64\usr\bin;$env:Path"
+
+      - name:  use bash
+        shell: bash
+        run:   echo $PWD
+
+      - name:  show Path
+        run:   Write-Host $env:PATH.replace(";", "`n")
+
+  add-path:
+    name: >-
+      add-path ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ windows-latest ]
+
+    steps:
+      - name:  use set-env
+        run:   echo "::add-path::C:\msys64\mingw64\bin;C:\msys64\usr\bin"
+
+      - name:  use bash
+        shell: bash
+        run:   echo $PWD
+
+      - name:  show Path
+        run:   Write-Host $env:PATH.replace(";", "`n")
