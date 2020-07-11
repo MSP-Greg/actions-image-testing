@@ -1,6 +1,6 @@
 name: Image Info
 
-# 2020-07-10.1
+# 2020-07-11.0
 
 on: [push, pull_request]
 
