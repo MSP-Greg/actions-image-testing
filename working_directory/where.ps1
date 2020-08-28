@@ -5,6 +5,8 @@ $dash = if ($host.Version.major -eq '5') {"$([char]151)"} else {"—"}
 
 $dash75 = $dash * 75
 
+echo "`nCurrent Path: $PSScriptRoot"
+
 # color hash used by EchoC and Color functions
 $clr = @{
   'red' = [char]0x001B + '[31;1m'
