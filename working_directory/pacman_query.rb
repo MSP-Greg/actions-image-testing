@@ -27,7 +27,7 @@ module Msys2Info
       if ENV['ImageOS'] and ENV['ImageVersion']
         puts ''
         highlight "Windows Image: #{ENV['ImageOS']} #{ENV['ImageVersion']}"
-        puts ''
+        puts "", "File dir: #{__dir__}", ""
       end
 
       a_i686  = `pacman.exe -Q | grep ^mingw-w64-i686- | sed 's/^mingw-w64-i686-//'`.split(/\r?\n/)
