@@ -22,7 +22,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: show ENV
-        run:  gci env:* | sort-object name
+        run:  gci env:* | sort-object name | Out-String -Stream -Width 120
 
       - name: show PATH
         run:  Write-Host $env:PATH.replace(";", "`n")
@@ -82,7 +82,7 @@ jobs:
 
       - name:  show ENV
         shell: pwsh
-        run:   gci env:* | sort-object name
+        run:   gci env:* | sort-object name | Out-String -Stream -Width 120
 
       - name:  show PATH
         shell: pwsh
