@@ -78,7 +78,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: disk info
-        run:  df -h 
+        run:  df -h
 
       - name:  show ENV
         shell: pwsh
@@ -87,7 +87,11 @@ jobs:
       - name:  show PATH
         shell: pwsh
         run:   echo $env:PATH.replace([IO.Path]::PathSeparator, "`n")
-        
+
+      - name: misc version info
+        run:  |
+          openssl version
+
       - name:  Ruby info
         shell: pwsh
         run:  |
