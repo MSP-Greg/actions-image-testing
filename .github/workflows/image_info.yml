@@ -56,11 +56,21 @@ jobs:
 
       - name: Ruby info
         run:  |
+          # Ruby Info ps1
+          ruby -W0 -e 'puts %Q(TOPDIR   #{RbConfig::TOPDIR})'
+          ruby -W0 -e 'puts %Q(bindir   #{RbConfig::CONFIG[%q(bindir)]})'
+          echo ''
+          ruby -W0 -e 'puts %Q(Gem.path), Gem.path'
+
+      - name: Ruby info bash
+        shell: bash
+        run:  |
           # Ruby Info
           ruby -W0 -e 'puts %Q(TOPDIR   #{RbConfig::TOPDIR})'
           ruby -W0 -e 'puts %Q(bindir   #{RbConfig::CONFIG[%q(bindir)]})'
           echo ''
           ruby -W0 -e 'puts %Q(Gem.path), Gem.path'
+
       - name: MSYS2 packages
         run:  ruby pacman_query.rb
 
