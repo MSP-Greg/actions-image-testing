@@ -101,6 +101,7 @@ jobs:
       - name: misc version info
         run:  |
           openssl version
+          gcc --version
 
       - name:  Ruby info
         shell: pwsh
