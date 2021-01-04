@@ -98,6 +98,14 @@ jobs:
         shell: pwsh
         run:   echo $env:PATH.replace([IO.Path]::PathSeparator, "`n")
 
+      - name:  apt list --installed
+        if:    startsWith(matrix.os, 'ubuntu')
+        run:   apt list --installed
+
+      - name:  Open fd limit
+        if:    startsWith(matrix.os, 'windows') == false
+        run:   echo Open fd limit $(ulimit -n)
+
       - name: misc version info
         run:  |
           openssl version
