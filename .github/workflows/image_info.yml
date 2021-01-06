@@ -1,8 +1,6 @@
 name: Image Info
 
-# 2020-11-16.0
-
-on: [push, pull_request]
+on: [push, pull_request, workflow_dispatch]
 
 jobs:
   Windows:
