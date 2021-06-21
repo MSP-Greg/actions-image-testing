@@ -22,8 +22,10 @@ jobs:
       - name: show ENV
         run:  gci env:* | sort-object name | Out-String -Stream -Width 120
 
-      - name: show PATH
-        run:  Write-Host $env:PATH.replace(";", "`n")
+      - name: show Path
+        run:  |
+          # Show Path with Powershell
+          $f, $r = $env:Path.split([IO.Path]::PathSeparator); $r
 
       - name: disk info
         run:  Get-CimInstance Win32_LogicalDisk
@@ -106,7 +108,9 @@ jobs:
 
       - name:  show PATH
         shell: pwsh
-        run:   echo $env:PATH.replace([IO.Path]::PathSeparator, "`n")
+        run:   |
+          # Show PATH with Powershell
+          $f, $r = $env:PATH.split([IO.Path]::PathSeparator); $r
 
       - name:  apt list --installed
         if:    startsWith(matrix.os, 'ubuntu')
@@ -128,15 +132,13 @@ jobs:
         shell: pwsh
         run:  |
           # Ruby Info
-          ruby -W0 -e 'puts %Q(TOPDIR   #{RbConfig::TOPDIR})'
-          ruby -W0 -e 'puts %Q(bindir   #{RbConfig::CONFIG[%q(bindir)]})'
-          echo ''
-          ruby -W0 -e 'puts %Q(Gem.path), Gem.path'
-          echo ''
-          echo 'which ruby:'
+          ruby -W0 -e "puts %Q(TOPDIR   #{RbConfig::TOPDIR})"
+          ruby -W0 -e "puts %Q(bindir   #{RbConfig::CONFIG[%q(bindir)]})"
+          echo ""
+          ruby -W0 -e "puts %Q(Gem.path), Gem.path"
+          echo "`nwhich ruby:"
           which -a ruby
-          echo ''
-          echo 'which rake:'
+          echo "`nwhich rake:"
           which -a rake
-          echo 'Socket Constants'
-          ruby -rsocket -e 'puts Socket.constants.sort'
+          echo "`nSocket Constants"
+          ruby -rsocket -e "puts Socket.constants.sort"
