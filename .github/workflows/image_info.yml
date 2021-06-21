@@ -61,6 +61,7 @@ jobs:
           ruby -W0 -e 'puts %Q(bindir   #{RbConfig::CONFIG[%q(bindir)]})'
           echo ''
           ruby -W0 -e 'puts %Q(Gem.path), Gem.path'
+          echo ''
           echo 'Socket Constants'
           ruby -rsocket -e 'puts Socket.constants.sort'
 
@@ -132,13 +133,16 @@ jobs:
         shell: pwsh
         run:  |
           # Ruby Info
-          ruby -W0 -e "puts %Q(TOPDIR   #{RbConfig::TOPDIR})"
-          ruby -W0 -e "puts %Q(bindir   #{RbConfig::CONFIG[%q(bindir)]})"
-          echo ""
-          ruby -W0 -e "puts %Q(Gem.path), Gem.path"
-          echo "`nwhich ruby:"
+          ruby -W0 -e 'puts %Q(TOPDIR   #{RbConfig::TOPDIR})'
+          ruby -W0 -e 'puts %Q(bindir   #{RbConfig::CONFIG[%q(bindir)]})'
+          echo ''
+          ruby -W0 -e 'puts %Q(Gem.path), Gem.path'
+          echo ''
+          echo 'which ruby:'
           which -a ruby
-          echo "`nwhich rake:"
+          echo ''
+          echo 'which rake:'
           which -a rake
-          echo "`nSocket Constants"
-          ruby -rsocket -e "puts Socket.constants.sort"
+          echo ''
+          echo 'Socket Constants'
+          ruby -rsocket -e 'puts Socket.constants.sort'
