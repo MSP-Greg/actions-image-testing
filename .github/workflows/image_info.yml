@@ -84,7 +84,7 @@ jobs:
           $env:Path = "C:/msys64/mingw32/bin;C:/msys64/usr/bin;$env:Path"
           gcc -v --version
 
-      - name: install UCRT
+      - name: install UCRT64 (only clang, cmake, & ragel)
         run:  |
           $env:Path = "C:/msys64/usr/bin;$env:Path"
           pacman -Sy --noconfirm --noprogressbar mingw-w64-ucrt-x86_64-clang mingw-w64-ucrt-x86_64-cmake mingw-w64-ucrt-x86_64-ragel
@@ -94,6 +94,24 @@ jobs:
 
       - name: MSYS2 packages
         run:  ruby pacman_query.rb
+
+      - name: UCRT64 where & version info
+        run:  |
+          # check with UCRT64 tools in Path
+          $env:Path = "C:/msys64/ucrt64/bin;C:/msys64/usr/bin;$env:Path"
+          ./where.ps1
+
+      - name: MINGW64 where & version info
+        run:  |
+          # check with MinGW64 tools in Path
+          $env:Path = "C:/msys64/mingw64/bin;C:/msys64/usr/bin;$env:Path"
+          ./where.ps1
+
+      - name: MINGW32 where & version info
+        run:  |
+          # check with MinGW32 tools in Path
+          $env:Path = "C:/msys64/mingw32/bin;C:/msys64/usr/bin;$env:Path"
+          ./where.ps1
 
   Ubuntu-macOS:
     name: >-
