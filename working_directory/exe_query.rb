@@ -22,21 +22,18 @@ module Msys2Info
           "\u2015".dup.force_encoding 'utf-8'
         end) * 7
 
-      ENV['Path'] = "C:/msys64/usr/bin;#{ENV['Path']}"
-
       if ENV['ImageOS'] and ENV['ImageVersion']
         puts ''
         highlight "Windows Image: #{ENV['ImageOS']} #{ENV['ImageVersion']}"
         puts "", "File dir: #{__dir__}", ""
       end
 
-      all_pkgs = `pacman.exe -Q`.split(/\r?\n/)
-      a_ucrt = find_pkgs(all_pkgs, 'mingw-w64-ucrt-x86_64-')
-      a_x64  = find_pkgs(all_pkgs, 'mingw-w64-x86_64-')
-      a_i686 = find_pkgs(all_pkgs, 'mingw-w64-i686-')
+      a_ucrt = `dir C:\\msys64\\ucrt64\\bin\\*.exe /B`.split(/\s+/).reject  { |s| s.start_with? 'x86_64-w64-mingw32-' }
+      a_x64  = `dir C:\\msys64\\mingw64\\bin\\*.exe /B`.split(/\s+/).reject { |s| s.start_with? 'x86_64-w64-mingw32-' }
+      a_i686 = `dir C:\\msys64\\mingw32\\bin\\*.exe /B`.split(/\s+/).reject { |s| s.start_with? 'i686-w64-mingw32-'   }
 
       unless a_ucrt.empty? && a_x64.empty? && a_i686.empty?
-        highlight "#{(dash[0..-3] + ' mingw-w64-ucrt-x86_64 Packages ' + dash[0..-3]).ljust WID} #{(dash + ' mingw-w64-x86_64 Packages ' + dash).ljust WID} #{dash} mingw-w64-i686 Packages #{dash}"
+        highlight "#{(dash + ' ucrt exe files ' + dash).ljust WID} #{(dash + ' mingw64 exe files ' + dash).ljust WID} #{dash} mingw32 exe files #{dash}"
 
         j_len = a_ucrt.length
         k_len = a_x64.length
@@ -44,52 +41,33 @@ module Msys2Info
 
         j, k, l = 0, 0, 0
         while j < j_len &&  k < k_len && l < l_len do
-          # get package base name
           ucrt = a_ucrt[j]
           x64  = a_x64[k]
           i686 = a_i686[l]
 
-          b_ucrt = ucrt[/\S+/]
-          b_x64  = x64[/\S+/]
-          b_i686 = i686[/\S+/]
-
-          b_min = [b_ucrt, b_x64, b_i686].min { |a, b| a.downcase <=> b.downcase }
+          min = [ucrt, x64, i686].min { |a, b| a.downcase <=> b.downcase }
 
           out = ''.dup
-          if b_min == b_ucrt
+          if min == ucrt
             j += 1
             out << "#{ucrt.ljust WID} "
           else
             out << "#{' '.ljust WID} "
           end
-          if b_min == b_x64
+          if min == x64
             k += 1
             out << "#{x64.ljust WID} "
           else
             out << "#{' '.ljust WID} "
           end
-          if b_min == b_i686
+          if min == i686
             l += 1
             out << i686
           end
           puts out.rstrip
         end
-      end
-
-      a_msys2 = all_pkgs.reject { |str| str.start_with? 'mingw-w64-' }.sort_by(&:downcase)
-
-      unless a_msys2.empty?
         puts ''
-        highlight "#{(dash + ' MSYS2 Packages ' + dash).ljust WID} #{dash} MSYS2 Packages #{dash}"
-        half = a_msys2.length/2.ceil
-        0.upto(half -1) { |i|
-          puts "#{(a_msys2[i] || '').ljust WID} #{a_msys2[i + half] || ''}"
-        }
       end
-    end
-
-    def find_pkgs(ary, query)
-      ary.select { |str| str.start_with? query }.map { |str| str.sub query, '' }.sort_by(&:downcase)
     end
 
     def highlight(str)

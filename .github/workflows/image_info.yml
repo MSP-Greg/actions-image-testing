@@ -84,6 +84,14 @@ jobs:
           $env:Path = "C:/msys64/mingw32/bin;C:/msys64/usr/bin;$env:Path"
           gcc -v --version
 
+      - name: install UCRT
+        run:  |
+          $env:Path = "C:/msys64/usr/bin;$env:Path"
+          pacman -Sy --noconfirm --noprogressbar mingw-w64-ucrt-x86_64-clang mingw-w64-ucrt-x86_64-cmake mingw-w64-ucrt-x86_64-ragel
+
+      - name: MSYS2 exe files
+        run:  ruby exe_query.rb
+
       - name: MSYS2 packages
         run:  ruby pacman_query.rb
 
