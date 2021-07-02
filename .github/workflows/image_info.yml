@@ -84,10 +84,10 @@ jobs:
           $env:Path = "C:/msys64/mingw32/bin;C:/msys64/usr/bin;$env:Path"
           gcc -v --version
 
-      - name: install UCRT64 (only clang, cmake, & ragel)
-        run:  |
-          $env:Path = "C:/msys64/usr/bin;$env:Path"
-          pacman -Sy --noconfirm --noprogressbar mingw-w64-ucrt-x86_64-clang mingw-w64-ucrt-x86_64-cmake mingw-w64-ucrt-x86_64-make mingw-w64-ucrt-x86_64-ragel
+      - name: Install Ruby
+        uses: MSP-Greg/ruby-setup-ruby@win-ucrt-1
+        with:
+          ruby-version: head
 
       - name: MSYS2 exe files
         run:  ruby exe_query.rb
