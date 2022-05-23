@@ -128,6 +128,7 @@ jobs:
         run:  |
           openssl version
           gcc --version
+          rustc --version
 
       - name:  Ruby info
         shell: pwsh
