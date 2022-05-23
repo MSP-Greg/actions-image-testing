@@ -129,6 +129,7 @@ jobs:
           openssl version
           gcc --version
           rustc --version
+          cargo --version
 
       - name:  Ruby info
         shell: pwsh
