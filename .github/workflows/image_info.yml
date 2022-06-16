@@ -124,6 +124,7 @@ jobs:
           echo Hard limit $(ulimit -Hn)
 
       - name: Disk Info
+        if:   startsWith(matrix.os, 'ubuntu')
         run:  blkid
 
       - name: misc version info
