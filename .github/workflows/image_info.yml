@@ -118,11 +118,13 @@ jobs:
         run:   apt list --installed
 
       - name:  Open fd limit
-        if:    startsWith(matrix.os, 'windows') == false
         run:   |
           echo Open fd limit $(ulimit -n)
           echo Soft limit $(ulimit -Sn)
           echo Hard limit $(ulimit -Hn)
+
+      - name: Disk Info
+        run:  blkid
 
       - name: misc version info
         run:  |
