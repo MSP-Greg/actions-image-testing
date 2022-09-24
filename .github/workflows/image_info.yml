@@ -51,6 +51,9 @@ jobs:
       - name: dir C:/msys64/home
         run:  dir C:/msys64/home
 
+      - name: dir C:/SeleniumWebDrivers
+        run:  dir C:/SeleniumWebDrivers
+
       - name: tcp port info
         run: netsh interface ipv4 show excludedportrange protocol=tcp
 
