@@ -33,7 +33,7 @@ function EchoC($text, $color) {
 
 echo ''
 
-$where = 'bash.exe', 'sh.exe', 'make.exe', 'cmake.exe', 'bison.exe', 'ragel.exe',
+$where = 'bash.exe', 'sh.exe', 'make.exe', 'cmake.exe', 'clang.exe', 'bison.exe', 'ragel.exe',
   'tar.exe', '7z.exe', 'perl',
   'libcrypto-1_1-x64.dll', 'libssl-1_1-x64.dll', 'openssl.pc',
   'libeay32.dll', 'ssleay32.dll'
