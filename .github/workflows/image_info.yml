@@ -141,8 +141,8 @@ jobs:
           rustc --version
           cargo --version
 
-      - name: toolcache versions
-        run: find /opt/hostedtoolcache/Ruby -maxdepth 1 -type d | grep -e [0-9]$
+      - name: Ruby toolcache versions (preinstalled)
+        run: find $AGENT_TOOLSDIRECTORY/Ruby -maxdepth 1 -type d | grep -e [0-9]$
 
       - name:  Ruby info
         shell: pwsh
