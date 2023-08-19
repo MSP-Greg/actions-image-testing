@@ -142,7 +142,7 @@ jobs:
           cargo --version
 
       - name: Ruby toolcache versions (preinstalled)
-        run: find $AGENT_TOOLSDIRECTORY/Ruby -maxdepth 1 -type d | grep -e [0-9]$
+        run: find $AGENT_TOOLSDIRECTORY/Ruby -maxdepth 1 -type d | grep -e [0-9]$ | sort
 
       - name:  Ruby info
         shell: pwsh
