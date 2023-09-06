@@ -138,6 +138,7 @@ jobs:
         run:  |
           openssl version
           gcc --version
+          echo "node $(node --version)"
           rustc --version
           cargo --version
 
