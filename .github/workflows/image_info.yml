@@ -63,6 +63,7 @@ jobs:
       - name: Ruby info
         run:  |
           # Ruby Info ps1
+          ruby -v
           ruby -W0 -e 'puts %Q(TOPDIR   #{RbConfig::TOPDIR})'
           ruby -W0 -e 'puts %Q(bindir   #{RbConfig::CONFIG[%q(bindir)]})'
           echo ''
@@ -76,6 +77,7 @@ jobs:
         shell: bash
         run:  |
           # Ruby Info
+          ruby -v
           ruby -W0 -e 'puts %Q(TOPDIR   #{RbConfig::TOPDIR})'
           ruby -W0 -e 'puts %Q(bindir   #{RbConfig::CONFIG[%q(bindir)]})'
           echo ''
@@ -146,9 +148,9 @@ jobs:
         run: find $AGENT_TOOLSDIRECTORY/Ruby -maxdepth 1 -type d | grep -e [0-9]$ | sort
 
       - name:  Ruby info
-        shell: pwsh
         run:  |
           # Ruby Info
+          ruby -v
           ruby -W0 -e 'puts %Q(TOPDIR   #{RbConfig::TOPDIR})'
           ruby -W0 -e 'puts %Q(bindir   #{RbConfig::CONFIG[%q(bindir)]})'
           echo ''
