@@ -145,6 +145,11 @@ jobs:
           rustc --version
           cargo --version
 
+      - name: which ruby, openssl
+        run:  |
+          for p in `which -a ruby`; do printf "%-25s  %s\n" $p "$($p --version)"; done
+          for p in `which -a openssl`; do printf "%-25s  %s\n" $p "$($p version)"; done
+
       - name: Ruby toolcache versions (preinstalled)
         run: find $AGENT_TOOLSDIRECTORY/Ruby -maxdepth 1 -type d | grep -e [0-9]$ | sort
 
