@@ -80,4 +80,7 @@ foreach ($e in $version) {
 EchoC "$dash75 misc version info" yel
 $out = &node --version | Out-String
 echo "node $out"
-echo ''
+$out = &cargo -v -V | Out-String
+echo "$out"
+$out = &rustc -v -V | Out-String
+echo "$out"

@@ -30,8 +30,6 @@ jobs:
       - name: disk info
         run:  |
           Get-CimInstance Win32_LogicalDisk
-          echo ''
-          Get-Disk
 
       - name: dir C:/
         run:  dir C:/
