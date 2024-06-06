@@ -28,7 +28,10 @@ jobs:
           $f, $r = $env:Path.split([IO.Path]::PathSeparator); $r
 
       - name: disk info
-        run:  Get-CimInstance Win32_LogicalDisk
+        run:  |
+          Get-CimInstance Win32_LogicalDisk
+          echo ''
+          Get-Disk
 
       - name: dir C:/
         run:  dir C:/
@@ -103,7 +106,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ ubuntu-22.04, ubuntu-20.04, macos-13, macos-12, macos-11 ]
+        os: [ ubuntu-24.04, ubuntu-22.04, ubuntu-20.04, macos-14, macos-13, macos-12, macos-11 ]
 
     steps:
       - name: repo checkout
