@@ -17,7 +17,7 @@ jobs:
 
     steps:
       - name: repo checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: show ENV
         run:  gci env:* | sort-object name | Out-String -Stream -Width 120
@@ -108,7 +108,7 @@ jobs:
 
     steps:
       - name: repo checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: disk info
         run:  df -h
