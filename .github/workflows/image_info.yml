@@ -127,6 +127,10 @@ jobs:
         if:    startsWith(matrix.os, 'ubuntu')
         run:   apt list --installed
 
+      - name:  brew list --versions
+        if:    startsWith(matrix.os, 'macos')
+        run:   brew list --versions
+
       - name:  Open fd limit
         run:   |
           echo Open fd limit $(ulimit -n)
