@@ -144,11 +144,12 @@ jobs:
       - name: misc version info
         run:  |
           openssl version
-          curl --version
-          gcc --version
+          curl  --version
+          gcc   --version
           echo "node $(node --version)"
           rustc --version
           cargo --version
+          java  --version
 
       - name: which ruby, openssl
         run:  |
