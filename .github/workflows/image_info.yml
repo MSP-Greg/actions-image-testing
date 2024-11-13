@@ -32,7 +32,7 @@ jobs:
           Get-CimInstance Win32_LogicalDisk
 
       - name: PhysicalDisk
-        run: Get-PhysicalDisk
+        run: Get-PhysicalDisk | Select *
 
       - name: dir C:/
         run:  dir C:/
