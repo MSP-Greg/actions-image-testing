@@ -27,9 +27,12 @@ jobs:
           # Show Path with Powershell
           $f, $r = $env:Path.split([IO.Path]::PathSeparator); $r
 
-      - name: disk info
+      - name: LogicalDisk
         run:  |
           Get-CimInstance Win32_LogicalDisk
+
+      - name: PhysicalDisk
+        run: Get-PhysicalDisk
 
       - name: dir C:/
         run:  dir C:/
