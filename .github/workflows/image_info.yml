@@ -88,19 +88,19 @@ jobs:
           ruby -W0 -e 'puts %Q(Gem.path), Gem.path'
 
       - name: MSYS2 gcc 64 bit
-        if:   ${{ endsWith(matrix.os, 'arm') == 'false' }}
+        if:   endsWith(matrix.os, 'arm') == 'false'
         run:  |
           $env:Path = "C:/msys64/mingw64/bin;C:/msys64/usr/bin;$env:Path"
           gcc -v --version
 
       - name: MSYS2 gcc 32 bit
-        if:   ${{ endsWith(matrix.os, 'arm') == 'false' }}
+        if:   endsWith(matrix.os, 'arm') == 'false'
         run:  |
           $env:Path = "C:/msys64/mingw32/bin;C:/msys64/usr/bin;$env:Path"
           gcc -v --version
 
       - name: MSYS2 packages
-        if:   ${{ endsWith(matrix.os, 'arm') == 'false' }}
+        if:   endsWith(matrix.os, 'arm') == 'false'
         run:  ruby pacman_query.rb
 
   Ubuntu-macOS:
