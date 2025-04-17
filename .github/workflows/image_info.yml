@@ -13,7 +13,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ windows-2025, windows-2022, windows-2019 ]
+        os: [ windows-11-arm, windows-2025, windows-2022, windows-2019 ]
 
     steps:
       - name: repo checkout
@@ -88,16 +88,19 @@ jobs:
           ruby -W0 -e 'puts %Q(Gem.path), Gem.path'
 
       - name: MSYS2 gcc 64 bit
+        if: !endsWith(matrix.os, 'arm')
         run:  |
           $env:Path = "C:/msys64/mingw64/bin;C:/msys64/usr/bin;$env:Path"
           gcc -v --version
 
       - name: MSYS2 gcc 32 bit
+        if: !endsWith(matrix.os, 'arm')
         run:  |
           $env:Path = "C:/msys64/mingw32/bin;C:/msys64/usr/bin;$env:Path"
           gcc -v --version
 
       - name: MSYS2 packages
+        if: !endsWith(matrix.os, 'arm')
         run:  ruby pacman_query.rb
 
   Ubuntu-macOS:
@@ -107,7 +110,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ ubuntu-24.04-arm, ubuntu-22.04-arm, ubuntu-24.04, ubuntu-22.04, ubuntu-20.04, macos-15, macos-14, macos-13 ]
+        os: [ ubuntu-24.04-arm, ubuntu-22.04-arm, ubuntu-24.04, ubuntu-22.04, macos-15, macos-14, macos-13 ]
 
     steps:
       - name: repo checkout
