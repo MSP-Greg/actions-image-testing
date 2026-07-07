@@ -19,6 +19,9 @@ jobs:
       - name: repo checkout
         uses: actions/checkout@v7
 
+      - name: Etc.nprocessors
+        run: ruby -retc -e 'STDOUT.syswrite "#{Etc.nprocessors}  Etc.nprocessors\n"'
+
       - name: show ENV
         run:  gci env:* | sort-object name | Out-String -Stream -Width 120
 
@@ -116,6 +119,9 @@ jobs:
     steps:
       - name: repo checkout
         uses: actions/checkout@v7
+
+      - name: Etc.nprocessors
+        run: ruby -retc -e 'STDOUT.syswrite "#{Etc.nprocessors}  Etc.nprocessors\n"'
 
       - name: disk info
         run:  df -h
